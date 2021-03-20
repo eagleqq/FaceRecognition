@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/add1.png</file>
+        <file>images/add2.png</file>
+        <file>images/add3.png</file>
+        <file>images/back1.png</file>
+        <file>images/back2.png</file>
+        <file>images/back3.png</file>
+        <file>images/del1.png</file>
+        <file>images/del2.png</file>
+        <file>images/find1.png</file>
+        <file>images/find2.png</file>
+        <file>images/mod1.png</file>
+        <file>images/mod2.png</file>
+        <file>images/face1.png</file>
+        <file>images/face2.png</file>
+        <file>images/face3.png</file>
+        <file>images/face4.png</file>
+        <file>images/face5.png</file>
+        <file>images/bg.jpg</file>
+        <file>images/admi1.png</file>
+        <file>images/admi2.png</file>
+        <file>images/cam-off.png</file>
+        <file>images/cam-on.png</file>
+        <file>images/exitsys.png</file>
+        <file>images/bg2.jpg</file>
+    </qresource>
+</RCC>
