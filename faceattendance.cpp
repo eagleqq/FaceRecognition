@@ -34,6 +34,7 @@ FaceAttendance::FaceAttendance(QWidget *parent) :
     connect(mAdmiWidget->mSettingWidget, &SettingWidget::sigTimePeriod, this, &FaceAttendance::slotSetTimePeriod);
 
     appendLog("初始化系统");
+    ui->pushButton_admi->setVisible(false);
 }
 
 FaceAttendance::~FaceAttendance()
@@ -81,43 +82,44 @@ void FaceAttendance::slotShowIDResult(QString id)
     qDebug()<< "slotShowIDResult";
     QString name = sqliteSingleton::getInstance()->getStudentName(id);
     //数据库中有
+    ui->lineEdit_id->setText(id);
+    ui->lineEdit_name->setText("");
     if(!name.isEmpty()){
-        mCameraThread->isWork = false;
-        if(mShowResultDialog == nullptr)
-            mShowResultDialog = new ShowResultDialog();
-        mShowResultDialog->setID(id);
-        mShowResultDialog->setName(name);
-        QDateTime local(QDateTime::currentDateTime());
-        mShowResultDialog->setTime(local.toString("yyyy-MM-dd hh:mm:ss"));
-        mShowResultDialog->exec();
-        if(mShowResultDialog->getIsOk()){
-            bool isValid = isTimeValid(local.toString("hh:mm:ss"));
-            if(isValid){
-                sqliteSingleton::getInstance()->insertRecordTable(id, name,
-                                                                  local.toString("yyyy-MM-dd"),
-                                                                  local.toString("hh:mm:ss"),
-                                                                  "有效");
-                appendLog(name + "在规定时间完成打卡");
-            }else{
-                sqliteSingleton::getInstance()->insertRecordTable(id, name,
-                                                                  local.toString("yyyy-MM-dd"),
-                                                                  local.toString("hh:mm:ss"),
-                                                                  "无效");
-                appendLog(name + "在非规定时间打卡");
-            }
-
-        }
-        delete mShowResultDialog;
-        mShowResultDialog = nullptr;
-        mCameraThread->isWork = true;
-        mCameraThread->start();
+        ui->lineEdit_name->setText(name);
     }
 }
+
+void FaceAttendance::on_pushButton_sure_clicked()
+{
+    QString id = ui->lineEdit_id->text();
+    QString name = ui->lineEdit_name->text();
+    if(id.isEmpty() || name.isEmpty()){
+        appendLog("没有检测结果无法打卡");
+        return;
+    }
+    QDateTime local(QDateTime::currentDateTime());
+    bool isValid = isTimeValid(local.toString("hh:mm:ss"));
+    if(isValid){
+        sqliteSingleton::getInstance()->insertRecordTable(id, name,
+                                                          local.toString("yyyy-MM-dd"),
+                                                          local.toString("hh:mm:ss"),
+                                                          "有效");
+        appendLog(name + "在规定时间完成打卡");
+    }else{
+        sqliteSingleton::getInstance()->insertRecordTable(id, name,
+                                                          local.toString("yyyy-MM-dd"),
+                                                          local.toString("hh:mm:ss"),
+                                                          "无效");
+        appendLog(name + "在非规定时间打卡");
+    }
+}
+
 
 void FaceAttendance::showTime()
 {
     QDateTime local(QDateTime::currentDateTime());
     label_date_time->setText(local.toString("yyyy年MM月dd日  hh:mm:ss"));
+    ui->textBrowserNotice->setText("通告标题：好好学习，天天向上 \n通告内容：读书、锻炼、做公益");
 }
 
 /**
@@ -152,7 +154,8 @@ void FaceAttendance::appendLog(const QString &text)
 {
     QDateTime local(QDateTime::currentDateTime());
     QString localTime = local.toString("yyyy-MM-dd hh:mm:ss  ");
-    ui->textBrowserLog->append(localTime + text);
+    ui->textBrowserLog->append(localTime);
+    ui->textBrowserLog->append(text);
 }
 
 bool FaceAttendance::isTimeValid(QString time)
@@ -172,6 +175,7 @@ void FaceAttendance::on_pushButton_cam_clicked()
 {
    static bool isOpen=false;
    if(isOpen){
+       appendLog("关闭摄像头");
        mCameraThread->isWork = false;
        isOpen = false;
        ui->pushButton_cam->setStyleSheet(
@@ -179,6 +183,7 @@ void FaceAttendance::on_pushButton_cam_clicked()
        ui->label_face->setPixmap(QPixmap());
        ui->label_face->clear();
    }else{
+       appendLog("打开摄像头");
        mCameraThread->start();
        isOpen = true;
        ui->pushButton_cam->setStyleSheet(

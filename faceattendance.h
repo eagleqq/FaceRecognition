@@ -52,6 +52,8 @@ private slots:
     void on_pushButton_admi_clicked();
     void slotSetTimePeriod(QString b_time, QString e_time);
 
+    void on_pushButton_sure_clicked();
+
 private:
     Ui::FaceAttendance *ui;
     QTimer *mUpdateTimeTimer;

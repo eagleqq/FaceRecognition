@@ -16,10 +16,10 @@ const int MAX_PROGRESS = MAX_CAP_IMAGE_NUM + 20;
 
 
 //数据库配置
-const QString HOST = "sh-cynosdbmysql-grp-3ychwa2k.sql.tencentcdb.com";
+const QString HOST = "81.68.157.200";
 const QString USER = "root";
-const QString PASSWORD = "zxcv@1234";
+const QString PASSWORD = "123456";
 const QString DATABASE = "Face";
-const int PORT= 29718;
+const int PORT= 3306;
 
 #endif // CONSTANTS_H
