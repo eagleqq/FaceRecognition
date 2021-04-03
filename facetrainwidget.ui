@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>706</width>
-    <height>374</height>
+    <width>850</width>
+    <height>462</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">color: rgb(255, 255, 255);</string>
+   <string notr="true">/*color: rgb(255, 255, 255);*/</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
@@ -27,7 +27,7 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>350</width>
+       <width>16777215</width>
        <height>16777215</height>
       </size>
      </property>
@@ -269,6 +269,12 @@ font: 9pt &quot;宋体&quot;;</string>
    </item>
    <item>
     <widget class="QGroupBox" name="groupBox_2">
+     <property name="maximumSize">
+      <size>
+       <width>800</width>
+       <height>16777215</height>
+      </size>
+     </property>
      <property name="styleSheet">
       <string notr="true"/>
      </property>

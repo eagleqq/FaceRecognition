@@ -38,6 +38,8 @@ FaceAttendance::FaceAttendance(QWidget *parent) :
 
 FaceAttendance::~FaceAttendance()
 {
+
+    mCameraThread->isWork = false;
     mCameraThread->wait();
     delete ui;
 }
@@ -51,7 +53,7 @@ void FaceAttendance::initWidget()
     label_date_time->setStyleSheet("color: rgb(255, 255, 255);");
     ui->statusBar->addWidget(label_date_time);
 
-    sqliteSingleton::getInstance()->initDB("QMYSQL");
+    sqliteSingleton::getInstance()->initDB("QSQLITE");
     sqliteSingleton::getInstance()->createTable();
     mAdmiWidget->setSqlDatabase(sqliteSingleton::getInstance()->db);
 }
@@ -67,6 +69,10 @@ void FaceAttendance::slotShowImage(QImage image)
         ui->label_face->show();
     } catch (exception ex) {
         qDebug() << "图片显示异常";
+    }
+    if(mCameraThread->isWork == false){
+        ui->label_face->setPixmap(QPixmap());
+        ui->label_face->clear();
     }
 }
 
@@ -171,6 +177,7 @@ void FaceAttendance::on_pushButton_cam_clicked()
        ui->pushButton_cam->setStyleSheet(
                    "border-image: url(:/images/cam-off.png);");
        ui->label_face->setPixmap(QPixmap());
+       ui->label_face->clear();
    }else{
        mCameraThread->start();
        isOpen = true;

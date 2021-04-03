@@ -1,4 +1,5 @@
 #include "camerathread.h"
+#include <QDateTime>
 #include <QDebug>
 #include <QImage>
 #include "constants.h"
@@ -37,7 +38,7 @@ void CameraThread::run()
     model->read(MyFaceFisherModel_XML.toStdString());// opencv2用load加载训练好的模型
     cap.open(0);
     while (true) {
-        msleep(100);
+        msleep(10);
 //        cap.open(0);
         if(!isWork){
             break;
@@ -49,7 +50,9 @@ void CameraThread::run()
             qDebug() << "摄像头读取异常";
         }
         try {
+           QDateTime startTime=  QDateTime::currentDateTime();
            FaceRecognition();
+           qDebug()<<"FaceRecognition time=" << startTime.msecsTo(QDateTime::currentDateTime()) /1000.0;
         } catch (exception ex) {
            qDebug() << "识别异常";
            QImage tempImage = QImage((const unsigned char*)(frame.data),
@@ -98,7 +101,7 @@ void CameraThread::FaceRecognition()
 //                          QImage::Format_RGB888);
     QImage tempImage(temp.data, temp.cols, temp.rows, temp.step1() , QImage::Format_RGB888);
     emit sigFaceResult(tempImage);
-    sleep(1);
+    msleep(10);
     emit sigIDResult(result);
     qDebug()<<"sigIDResult";
 }

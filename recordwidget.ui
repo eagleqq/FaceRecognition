@@ -17,7 +17,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
+      <string notr="true">/*color: rgb(255, 255, 255);*/</string>
      </property>
      <property name="title">
       <string>打卡记录</string>

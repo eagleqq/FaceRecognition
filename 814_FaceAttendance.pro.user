@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.8.0, 2021-03-19T23:50:00. -->
+<!-- Written by QtCreator 4.8.0, 2021-03-24T21:05:11. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -127,7 +127,7 @@
     <value type="bool" key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild">true</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.1">
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/eagle/Desktop/人脸识别打卡系统V2.0/build-814_FaceAttendance-Desktop_Qt_5_12_0_MinGW_64_bit-Release</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">D:/worksapces/qtpro/build-814_FaceAttendance-Desktop_Qt_5_12_0_MinGW_64_bit-Release</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -296,8 +296,8 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">814_FaceAttendance</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">814_FaceAttendance2</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/eagle/Desktop/qtpro/814_FaceAttendance/814_FaceAttendance.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:D:/worksapces/qtpro/FaceRecognition/814_FaceAttendance.pro</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">814_FaceAttendance.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="uint" key="RunConfiguration.QmlDebugServerPort">3768</value>
@@ -308,7 +308,7 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/eagle/Desktop/人脸识别打卡系统V2.0/build-814_FaceAttendance-Desktop_Qt_5_12_0_MinGW_64_bit-Release</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">D:/worksapces/qtpro/build-814_FaceAttendance-Desktop_Qt_5_12_0_MinGW_64_bit-Release</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>

@@ -3,8 +3,8 @@
 BaseMainWindow::BaseMainWindow(QWidget *parent):
     QMainWindow(parent)
 {
-    this->setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
-    this->setWindowOpacity(0.9);//设置透明
+//    this->setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
+//    this->setWindowOpacity(0.9);//设置透明
 }
 
 void BaseMainWindow::mousePressEvent(QMouseEvent *ev)

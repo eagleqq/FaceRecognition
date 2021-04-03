@@ -31,7 +31,7 @@ void PasswordDialog::setPassword(QList<QString> pwd)
 void PasswordDialog::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
-    painter.drawPixmap(rect(), QPixmap(":/images/bg2.jpg"), QRect());
+//    painter.drawPixmap(rect(), QPixmap(":/images/bg2.jpg"), QRect());
 }
 
 void PasswordDialog::on_num0_clicked()

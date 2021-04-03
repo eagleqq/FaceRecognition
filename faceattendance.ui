@@ -6,17 +6,23 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>941</width>
-    <height>560</height>
+    <width>921</width>
+    <height>549</height>
    </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>921</width>
+    <height>549</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>人脸识别打卡系统</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QMainWindow{
+   <string notr="true">/*QMainWindow{
 border-image: url(:/images/bg.jpg);
-}
+}*/
 </string>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -73,7 +79,7 @@ border-image: url(:/images/bg.jpg);
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">/*color: rgb(255, 255, 255);*/</string>
         </property>
         <property name="text">
          <string>人脸识别打卡系统</string>
@@ -136,7 +142,7 @@ border-image: url(:/images/admi1.png);
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">/*color: rgb(255, 255, 255);*/</string>
         </property>
         <property name="title">
          <string/>
@@ -189,8 +195,8 @@ border-radius:150px;
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color:transparent;
-color: rgb(255, 255, 255);</string>
+          <string notr="true">/*background-color:transparent;
+color: rgb(255, 255, 255);*/</string>
          </property>
         </widget>
         <widget class="QPushButton" name="pushButton_cam">

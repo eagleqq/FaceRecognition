@@ -49,7 +49,7 @@ void AdmiWidget::on_pushButton_record_clicked()
 void AdmiWidget::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
-    painter.drawPixmap(rect(), QPixmap(":/images/bg.jpg"), QRect());
+//    painter.drawPixmap(rect(), QPixmap(":/images/bg.jpg"), QRect());
 }
 
 void AdmiWidget::on_pushButton_exit_clicked()
