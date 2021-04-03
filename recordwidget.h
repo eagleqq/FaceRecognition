@@ -22,6 +22,8 @@ private slots:
 
     void on_pushButtonExport_clicked();
 
+    void on_pushButton_clear_clicked();
+
 private:
     Ui::RecordWidget *ui;
     QSqlDatabase db;

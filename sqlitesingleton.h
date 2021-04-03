@@ -26,6 +26,9 @@ public:
 
     void initDB(QString db_type);
     void createTable();
+    bool insertNoticeTable(QString title, QString context);
+    QString getNoticeTitle();
+    QString getNoticeContext();
     void insertAdmiTable(QString id, QString pwd);
     void insertStuTable(QString id, QString name);
     void insertRecordTable(QString stu_id, QString name,QString clock_date, QString clock_time, QString valid);

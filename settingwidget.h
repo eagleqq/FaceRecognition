@@ -22,6 +22,8 @@ signals:
 private slots:
     void on_pushButton_save_clicked();
 
+    void on_pushButton_send_clicked();
+
 private:
     Ui::SettingWidget *ui;
 };

@@ -53,6 +53,12 @@ void RecordWidget::on_pushButton_search_clicked()
     mSQLModel->select(); //显示结果
 }
 
+void RecordWidget::on_pushButton_clear_clicked()
+{
+    ui->lineEditID->clear();
+    mSQLModel->setFilter("");
+    mSQLModel->select(); //显示结果
+}
 
 void RecordWidget::on_pushButtonExport_clicked()
 {
@@ -83,3 +89,5 @@ void RecordWidget::on_pushButtonExport_clicked()
         QMessageBox::information(NULL, "提示", "导出成功！\n导出路径：" +fileName);
     }
 }
+
+

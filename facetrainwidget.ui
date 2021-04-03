@@ -338,7 +338,7 @@ font: 9pt &quot;宋体&quot;;</string>
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>30</height>
+          <height>35</height>
          </size>
         </property>
         <property name="styleSheet">

@@ -77,6 +77,16 @@ font: 9pt &quot;宋体&quot;;</string>
            <string notr="true">color: rgb(255, 0, 0);
 font: 9pt &quot;宋体&quot;;</string>
           </property>
+          <property name="dateTime">
+           <datetime>
+            <hour>0</hour>
+            <minute>0</minute>
+            <second>0</second>
+            <year>2021</year>
+            <month>4</month>
+            <day>3</day>
+           </datetime>
+          </property>
           <property name="displayFormat">
            <string>yyyy-MM-dd</string>
           </property>
@@ -86,8 +96,8 @@ font: 9pt &quot;宋体&quot;;</string>
           <property name="date">
            <date>
             <year>2021</year>
-            <month>3</month>
-            <day>8</day>
+            <month>4</month>
+            <day>3</day>
            </date>
           </property>
          </widget>
@@ -97,7 +107,7 @@ font: 9pt &quot;宋体&quot;;</string>
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>30</height>
+            <height>35</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -111,6 +121,22 @@ font: 9pt &quot;宋体&quot;;</string>
           </property>
           <property name="text">
            <string>查询</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_clear">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>35</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 0, 0);</string>
+          </property>
+          <property name="text">
+           <string>清除查询条件</string>
           </property>
          </widget>
         </item>
@@ -144,7 +170,7 @@ font: 9pt &quot;宋体&quot;;</string>
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>30</height>
+            <height>35</height>
            </size>
           </property>
           <property name="styleSheet">

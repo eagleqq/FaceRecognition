@@ -26,7 +26,6 @@ CONFIG += c++11
 # 添加src目录下的源文件
 SOURCES += \
         main.cpp \
-        faceattendance.cpp\
     src/bif.cpp \
     src/eigen_faces.cpp \
     src/face_alignment.cpp \
@@ -51,11 +50,9 @@ SOURCES += \
     basewidget.cpp \
     basemainwindow.cpp \
     trainthread.cpp \
-    showresultdialog.cpp \
     sqlitesingleton.cpp
 
 HEADERS += \
-        faceattendance.h\
     face/bif.hpp \
     face/face_alignment.hpp \
     face/facemark.hpp \
@@ -79,17 +76,14 @@ HEADERS += \
     basewidget.h \
     basemainwindow.h \
     trainthread.h \
-    showresultdialog.h \
     sqlitesingleton.h
 
 FORMS += \
-        faceattendance.ui \
     passworddialog.ui \
     admiwidget.ui \
     settingwidget.ui \
     recordwidget.ui \
-    facetrainwidget.ui \
-    showresultdialog.ui
+    facetrainwidget.ui
 
 
 INCLUDEPATH +=D:\opencv64\include

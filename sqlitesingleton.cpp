@@ -54,10 +54,48 @@ void sqliteSingleton::createTable()
     ret = query.exec("create table record_info (id int primary key, stuId int, name varchar(20), clockDate varchar(40),clockTime varchar(40), isValid varchar(80))");
     qDebug() << "创建打卡记录表格record_info" << ret;
 
+    ret = query.exec("create table notice_info (id int primary key, title varchar(20), context varchar(40))");
+    qDebug() << "创建通知表格notice_info" << ret;
+
     insertAdmiTable("1", "654321");
-    insertStuTable("2016117249", "shenjun");
-    insertRecordTable("17310520301", "fangjun", "", "", "无效");
+//    insertStuTable("2016117249", "shenjun");
+    //    insertRecordTable("17310520301", "fangjun", "", "", "无效");
 }
+
+bool sqliteSingleton::insertNoticeTable(QString title, QString context)
+{
+    QSqlQuery query(db);
+    bool ret = query.exec(tr("insert into notice_info(title, context) values('%1', '%2')").arg(title).arg(context));
+    qDebug() << "insertNoticeTable" << ret;
+    return ret;
+}
+
+QString sqliteSingleton::getNoticeTitle()
+{
+    QString title="";
+    QSqlQuery query(db);
+    bool ret = query.exec("select * from notice_info");
+    qDebug() << "getNoticeTitle" << ret;
+    while (query.next()) {
+        title = query.value("title").toString();
+        qDebug()<<title;
+    }
+    return title;
+}
+
+QString sqliteSingleton::getNoticeContext()
+{
+    QString context="";
+    QSqlQuery query(db);
+    bool ret = query.exec("select * from notice_info");
+    qDebug() << "getNoticeContext" << ret;
+    while (query.next()) {
+        context = query.value("context").toString();
+        qDebug()<<context;
+    }
+    return context;
+}
+
 
 void sqliteSingleton::insertAdmiTable(QString id, QString pwd)
 {
@@ -104,11 +142,11 @@ QList<QString> sqliteSingleton::getAdmiPassword()
 {
     QList<QString> pwdList;
     QSqlQuery query(db);
-    bool ret = query.exec(tr("select * from admi_info"));
-    qDebug() << "getAdmiPassword" << ret;
+    query.exec(tr("select * from admi_info"));
     while (query.next()) {
         pwdList.append(query.value("password").toString());
     }
+    qDebug() << "getAdmiPassword" << pwdList;
     return pwdList;
 }
 
