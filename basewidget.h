@@ -3,6 +3,7 @@
 
 #include <QWidget>
 
+//widget  实现界面鼠标移动效果
 class BaseWidget: public QWidget
 {
     Q_OBJECT

@@ -16,6 +16,7 @@ sqliteSingleton::sqliteSingleton(QObject *parent)
 
 void sqliteSingleton::initDB(QString db_type)
 {
+    //初始化数据库 支持sqlite  mysql
     qDebug() << "初始化数据库";
     if(db_type == "QSQLITE"){
         db = QSqlDatabase::addDatabase("QSQLITE");
@@ -44,6 +45,7 @@ void sqliteSingleton::initDB(QString db_type)
 
 void sqliteSingleton::createTable()
 {
+    //创建表格
     QSqlQuery query(db);
     bool ret = query.exec("create table admi_info (id varchar(40) primary key, password varchar(20))");
     qDebug() << "创建管理员信息表格admi_info" << ret;
@@ -64,6 +66,7 @@ void sqliteSingleton::createTable()
 
 bool sqliteSingleton::insertNoticeTable(QString title, QString context)
 {
+    //添加通知信息 标题 内容
     QSqlQuery query(db);
     bool ret = query.exec(tr("insert into notice_info(title, context) values('%1', '%2')").arg(title).arg(context));
     qDebug() << "insertNoticeTable" << ret;
@@ -72,6 +75,7 @@ bool sqliteSingleton::insertNoticeTable(QString title, QString context)
 
 QString sqliteSingleton::getNoticeTitle()
 {
+    //获取最新通知标题
     QString title="";
     QSqlQuery query(db);
     bool ret = query.exec("select * from notice_info");
@@ -85,6 +89,7 @@ QString sqliteSingleton::getNoticeTitle()
 
 QString sqliteSingleton::getNoticeContext()
 {
+    //获取最新通知内容
     QString context="";
     QSqlQuery query(db);
     bool ret = query.exec("select * from notice_info");
@@ -99,6 +104,7 @@ QString sqliteSingleton::getNoticeContext()
 
 void sqliteSingleton::insertAdmiTable(QString id, QString pwd)
 {
+    //插入管理员信息
     QSqlQuery query(db);
     bool ret = query.exec(tr("insert into admi_info values('%1', '%2')").arg(id).arg(pwd));
     qDebug() << "insertAdmiTable" << ret;
@@ -106,6 +112,7 @@ void sqliteSingleton::insertAdmiTable(QString id, QString pwd)
 
 void sqliteSingleton::insertStuTable(QString id, QString name)
 {
+    //添加学生信息
     QSqlQuery query(db);
     bool ret = query.exec(tr("insert into stu_info values('%1', '%2')").arg(id).arg(name));
     qDebug() << "insertStuTable" << ret;
@@ -114,6 +121,7 @@ void sqliteSingleton::insertStuTable(QString id, QString name)
 void sqliteSingleton::insertRecordTable(QString stu_id, QString name,
                                         QString clock_date, QString clock_time, QString valid)
 {
+    //添加历史记录
     QSqlQuery query(db);
     bool ret = query.exec(tr("insert into record_info(stuId, name, clockDate, clockTime, isValid) "
                              "values('%1', '%2', '%3', '%4','%5')")
@@ -127,6 +135,7 @@ void sqliteSingleton::insertRecordTable(QString stu_id, QString name,
 
 QString sqliteSingleton::getStudentName(QString id)
 {
+    //根据学号查询名字
     QString name;
     QSqlQuery query(db);
     bool ret = query.exec(tr("select * from stu_info where id='%1'").arg(id));
@@ -140,6 +149,7 @@ QString sqliteSingleton::getStudentName(QString id)
 
 QList<QString> sqliteSingleton::getAdmiPassword()
 {
+    //获取管理员密码
     QList<QString> pwdList;
     QSqlQuery query(db);
     query.exec(tr("select * from admi_info"));

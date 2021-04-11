@@ -9,11 +9,13 @@ BaseWidget::BaseWidget(QWidget *parent):
 
 void BaseWidget::mousePressEvent(QMouseEvent *ev)
 {
+    //鼠标按下
     this->posMouseOrigin = QCursor::pos(); //cursor是一个光标类
 }
 
 void BaseWidget::mouseMoveEvent(QMouseEvent *ev)
 {
+    //鼠标移动
     QPoint ptMouseNow = QCursor::pos();
     QPoint ptDelta = ptMouseNow - this->posMouseOrigin;
     move(this->pos() + ptDelta);
@@ -22,5 +24,5 @@ void BaseWidget::mouseMoveEvent(QMouseEvent *ev)
 
 void BaseWidget::mouseReleaseEvent(QMouseEvent *ev)
 {
-
+    //鼠标释放
 }

@@ -8,13 +8,14 @@ AdmiWidget::AdmiWidget(QWidget *parent) :
     ui(new Ui::AdmiWidget)
 {
     ui->setupUi(this);
-    mSettingWidget = new SettingWidget(this);
-    mRecordWidget = new RecordWidget(this);
-    mFaceTrainWidget = new FaceTrainWidget(this);
+    mSettingWidget = new SettingWidget(this);     //设置页面
+    mRecordWidget = new RecordWidget(this);       //打卡记录页面
+    mFaceTrainWidget = new FaceTrainWidget(this);  //训练页面
+
+    //使用stackedWidget添加以上所有页面
     ui->stackedWidget->addWidget(mSettingWidget);
     ui->stackedWidget->addWidget(mRecordWidget);
     ui->stackedWidget->addWidget(mFaceTrainWidget);
-
     ui->stackedWidget->setCurrentWidget(mSettingWidget);
 }
 
@@ -25,6 +26,7 @@ AdmiWidget::~AdmiWidget()
 
 void AdmiWidget::setSqlDatabase(QSqlDatabase db)
 {
+    //设置数据库句柄
     mRecordWidget->setSqlDatabase(db);
 }
 
@@ -54,5 +56,6 @@ void AdmiWidget::paintEvent(QPaintEvent *event)
 
 void AdmiWidget::on_pushButton_exit_clicked()
 {
+    //退出系统
     this->close();
 }

@@ -7,6 +7,7 @@ namespace Ui {
 class PasswordDialog;
 }
 
+//密码输入对话框
 class PasswordDialog : public QDialog
 {
     Q_OBJECT

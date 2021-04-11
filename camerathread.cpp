@@ -9,6 +9,7 @@ CameraThread::CameraThread()
     g_rng(12345);
 }
 
+//预测
 int CameraThread::Predict(Mat src_image)
 {
     Mat face_test;
@@ -29,6 +30,7 @@ int CameraThread::Predict(Mat src_image)
     return predict;
 }
 
+//重写线程run函数
 void CameraThread::run()
 {
     isWork = true;
@@ -64,6 +66,7 @@ void CameraThread::run()
     cap.release();
 }
 
+//人脸检测
 void CameraThread::FaceRecognition()
 {
     vector<Rect> faces(0);//建立用于存放人脸的向量容器

@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 
-
+//mainwindow基类  实现界面鼠标移动效果
 class BaseMainWindow: public QMainWindow
 {
     Q_OBJECT

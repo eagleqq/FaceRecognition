@@ -20,6 +20,7 @@ using namespace cv;
 
 #define SEPARATOR ';'
 
+//训练线程
 class TrainThread:public QThread
 {
     Q_OBJECT

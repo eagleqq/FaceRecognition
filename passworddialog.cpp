@@ -17,12 +17,13 @@ PasswordDialog::~PasswordDialog()
 {
     delete ui;
 }
-
+//判断密码是否输入正确
 bool PasswordDialog::getIsOk()
 {
     return isOk;
 }
 
+//设置密码锁
 void PasswordDialog::setPassword(QList<QString> pwd)
 {
     mPwdList = pwd;
@@ -33,7 +34,7 @@ void PasswordDialog::paintEvent(QPaintEvent *event)
     QPainter painter(this);
 //    painter.drawPixmap(rect(), QPixmap(":/images/bg2.jpg"), QRect());
 }
-
+//输入0
 void PasswordDialog::on_num0_clicked()
 {
     QString text = ui->pressedit->text();
@@ -104,6 +105,7 @@ void PasswordDialog::on_num9_clicked()
     ui->pressedit->setText(text);
 }
 
+//删除
 void PasswordDialog::on_delbt_clicked()
 {
     QString text = ui->pressedit->text();
@@ -111,6 +113,7 @@ void PasswordDialog::on_delbt_clicked()
     ui->pressedit->setText(text);
 }
 
+//电机确认
 void PasswordDialog::on_endbt_clicked()
 {
     QString text = ui->pressedit->text();

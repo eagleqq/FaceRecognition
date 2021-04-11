@@ -7,7 +7,7 @@
 namespace Ui {
 class SettingWidget;
 }
-
+//设置页面
 class SettingWidget : public QWidget
 {
     Q_OBJECT

@@ -23,8 +23,9 @@ RecordWidget::~RecordWidget()
 
 void RecordWidget::setSqlDatabase(QSqlDatabase db)
 {
+    //初始化数据库model
     this->db = db;
-    mSQLModel = new QSqlTableModel(this, this->db);
+    mSQLModel = new QSqlTableModel(this, this->db);  //数据库模型
     mSQLModel->setTable("record_info");
     mSQLModel->setHeaderData(0,Qt::Horizontal,tr("序号"));
     mSQLModel->setHeaderData(1,Qt::Horizontal,tr("学号"));
@@ -43,18 +44,27 @@ void RecordWidget::setSqlDatabase(QSqlDatabase db)
 
 void RecordWidget::on_pushButton_search_clicked()
 {
-    QString idFilter="";
-    QString timeFilter="";
-    idFilter = tr("stuId = '%1'").arg(ui->lineEditID->text().toInt());
+     //按照学号查询
+     if(ui->lineEditID->text().isEmpty()){
+          QMessageBox::information(this, "提示", "请输入学号");
+          return;
+     }
+    QString idFilter = tr("stuId = '%1'").arg(ui->lineEditID->text());
     mSQLModel->setFilter(idFilter);
-    timeFilter = tr("clockDate = '%1'").arg(ui->dateEditTime->text());
-    qDebug()<< idFilter << timeFilter;
+    mSQLModel->select(); //显示结果
+}
+
+void RecordWidget::on_pushButton_search_time_clicked()
+{
+  //按照时间查询
+    QString timeFilter = tr("clockDate = '%1'").arg(ui->dateEditTime->text());
     mSQLModel->setFilter(timeFilter);
     mSQLModel->select(); //显示结果
 }
 
 void RecordWidget::on_pushButton_clear_clicked()
 {
+    //清除查询条件
     ui->lineEditID->clear();
     mSQLModel->setFilter("");
     mSQLModel->select(); //显示结果
@@ -62,6 +72,7 @@ void RecordWidget::on_pushButton_clear_clicked()
 
 void RecordWidget::on_pushButtonExport_clicked()
 {
+    //导出功能
     QDir dir;
     QString fileName = QFileDialog::getSaveFileName(this,
             tr("Open Excel"),
@@ -89,5 +100,3 @@ void RecordWidget::on_pushButtonExport_clicked()
         QMessageBox::information(NULL, "提示", "导出成功！\n导出路径：" +fileName);
     }
 }
-
-

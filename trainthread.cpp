@@ -12,6 +12,7 @@ TrainThread::~TrainThread()
 {
 }
 
+//重写线程run
 void TrainThread::run()
 {
      qDebug()<<"启动训练线程";
@@ -24,6 +25,7 @@ void TrainThread::run()
      }
 }
 
+//读取at.txt文件开始训练
 void TrainThread::train()
 {
     //读取你的CSV文件路径.

@@ -14,6 +14,7 @@
 using namespace std;
 using namespace cv;
 
+//相机读取线程
 class CameraThread : public QThread
 {
     Q_OBJECT

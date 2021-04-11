@@ -7,6 +7,8 @@
 #include <QDebug>
 #include <QSqlDatabase>
 
+
+//单例模式数据库
 class sqliteSingleton: public QObject
 {
     Q_OBJECT

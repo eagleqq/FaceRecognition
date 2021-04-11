@@ -20,7 +20,7 @@ FaceTrainWidget::FaceTrainWidget(QWidget *parent) :
     ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
     updateTableData();
 
-    mCapTimer = new QTimer;
+    mCapTimer = new QTimer;  //拍照定时器
     connect(mCapTimer, SIGNAL(timeout()), this, SLOT(showImage()));//时间到后启动opencam时间
     mTrainThread = new TrainThread(this);//训练线程
     connect(mTrainThread, SIGNAL(sigFinished()), this, SLOT(slotTrainFinished()));
@@ -41,6 +41,7 @@ FaceTrainWidget::~FaceTrainWidget()
 
 QList<QString> FaceTrainWidget::getAllFileFolder(QString dirPath)
 {
+    //获取指定路径下的所有文件夹的名称
     QList<QString> folderList;
     QDir dir(dirPath);
     dir.setFilter(QDir::Dirs);
@@ -54,6 +55,7 @@ QList<QString> FaceTrainWidget::getAllFileFolder(QString dirPath)
 
 void FaceTrainWidget::updateTableData()
 {
+    //刷新表格内容
     QList<QString> list = getAllFileFolder(ATT_FACES_PATH);
     qDebug()<<list;
     int row = 0;
@@ -73,6 +75,7 @@ void FaceTrainWidget::updateTableData()
 
 bool FaceTrainWidget::DeleteFileOrFolder(const QString &strPath)
 {
+    //删除一个文件或者文件夹
     if (strPath.isEmpty() || !QDir().exists(strPath))//是否传入了空的路径||路径是否存在
         return false;
 
@@ -88,6 +91,7 @@ bool FaceTrainWidget::DeleteFileOrFolder(const QString &strPath)
     return true;
 }
 
+//生成csv文件，存入at.txt中，记录图片的路径
 void FaceTrainWidget::CreateCSV()
 {
     QList<QString> list = getAllFileFolder(ATT_FACES_PATH);
@@ -112,6 +116,7 @@ void FaceTrainWidget::CreateCSV()
     file.close();
 }
 
+//添加信息
 void FaceTrainWidget::on_pushButton_add_clicked()
 {
 //    pic_num = 0;
@@ -144,7 +149,7 @@ void FaceTrainWidget::on_pushButton_add_clicked()
     }
     updateTableData();
 }
-
+//删除信息
 void FaceTrainWidget::on_pushButton_del_clicked()
 {
     QModelIndex index = ui->tableWidget->selectionModel()->currentIndex();
@@ -170,11 +175,14 @@ void FaceTrainWidget::on_pushButton_del_clicked()
 
 void FaceTrainWidget::on_pushButton_find_clicked()
 {
+    //刷新表格内容
     updateTableData();
+    QMessageBox::information(this, "提示", "刷新完成");
 }
 
 void FaceTrainWidget::on_pushButton_cap_clicked()
 {
+    //开始拍照训练
     QModelIndex index = ui->tableWidget->selectionModel()->currentIndex();
     int row = index.row();
     if(row <=-1){
@@ -190,6 +198,7 @@ void FaceTrainWidget::on_pushButton_cap_clicked()
 
 void FaceTrainWidget::showImage()
 {
+    //人脸检测、拍照、启动训练
 //    cap.open(0);
     Mat temp;//临时保存RGB图像
     cap>>frame;//摄像头读取头像
@@ -250,6 +259,7 @@ void FaceTrainWidget::showImage()
 
 void FaceTrainWidget::slotTrainFinished()
 {
+    //训练完成
     this->setEnabled(true);
     ui->label_tip->setText("训练完成");
     ui->progressBarTrain->setValue(MAX_PROGRESS);
@@ -258,6 +268,7 @@ void FaceTrainWidget::slotTrainFinished()
 
 void FaceTrainWidget::slotTrainFailed()
 {
+    //训练失败
     this->setEnabled(true);
     QMessageBox::information(NULL, "提示", "训练失败！");
 }
