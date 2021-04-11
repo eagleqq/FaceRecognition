@@ -43,15 +43,8 @@ SOURCES += \
     src/regtree.cpp \
     src/trainFacemark.cpp \
     camerathread.cpp \
-    passworddialog.cpp \
-    admiwidget.cpp \
-    settingwidget.cpp \
-    recordwidget.cpp \
-    facetrainwidget.cpp \
     basewidget.cpp \
     basemainwindow.cpp \
-    trainthread.cpp \
-    showresultdialog.cpp \
     sqlitesingleton.cpp
 
 HEADERS += \
@@ -70,26 +63,13 @@ HEADERS += \
     src/precomp.hpp \
     face.hpp \
     camerathread.h \
-    passworddialog.h \
-    admiwidget.h \
-    settingwidget.h \
-    recordwidget.h \
-    facetrainwidget.h \
     constants.h \
     basewidget.h \
     basemainwindow.h \
-    trainthread.h \
-    showresultdialog.h \
     sqlitesingleton.h
 
 FORMS += \
-        faceattendance.ui \
-    passworddialog.ui \
-    admiwidget.ui \
-    settingwidget.ui \
-    recordwidget.ui \
-    facetrainwidget.ui \
-    showresultdialog.ui
+        faceattendance.ui
 
 
 INCLUDEPATH +=D:\opencv64\include

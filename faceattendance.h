@@ -10,7 +10,6 @@
 #include<math.h>
 #include <QLabel>
 #include <QTimer>
-#include "admiwidget.h"
 #include "basemainwindow.h"
 #include "camerathread.h"
 #include "face.hpp"
@@ -20,7 +19,6 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include "constants.h"
-#include "showresultdialog.h"
 
 using namespace std;
 using namespace cv;
@@ -59,10 +57,8 @@ private:
     QTimer *mUpdateTimeTimer;
     CameraThread *mCameraThread;
     QLabel *label_date_time;
-    AdmiWidget *mAdmiWidget;
 
     QSqlDatabase db;
-    ShowResultDialog *mShowResultDialog;
 
     QString mBeginTime;
     QString mEndTime;

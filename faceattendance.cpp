@@ -1,7 +1,5 @@
 ﻿#include "faceattendance.h"
 #include "ui_faceattendance.h"
-#include "passworddialog.h"
-#include "admiwidget.h"
 #include "sqlitesingleton.h"
 
 #include <QDateTime>
@@ -23,15 +21,15 @@ FaceAttendance::FaceAttendance(QWidget *parent) :
 
     initWidget();
 
-    mUpdateTimeTimer = new QTimer(this);
+    mUpdateTimeTimer = new QTimer(this);   //刷新时间定时器
     connect(mUpdateTimeTimer, SIGNAL(timeout()), this, SLOT(showTime()));
     mUpdateTimeTimer->start(1000);
 
-    mCameraThread = new CameraThread();
+    mCameraThread = new CameraThread();  //相机读取线程，包含料人脸识别
     connect(mCameraThread, &CameraThread::sigFaceResult, this, &FaceAttendance::slotShowImage);
     connect(mCameraThread, &CameraThread::sigIDResult, this, &FaceAttendance::slotShowIDResult);
 
-    connect(mAdmiWidget->mSettingWidget, &SettingWidget::sigTimePeriod, this, &FaceAttendance::slotSetTimePeriod);
+//    connect(mAdmiWidget->mSettingWidget, &SettingWidget::sigTimePeriod, this, &FaceAttendance::slotSetTimePeriod);
 
     appendLog("初始化系统");
     ui->pushButton_admi->setVisible(false);
@@ -47,8 +45,6 @@ FaceAttendance::~FaceAttendance()
 
 void FaceAttendance::initWidget()
 {
-    mShowResultDialog = nullptr;
-    mAdmiWidget = new AdmiWidget();
     this->setWindowIcon(QIcon(":/images/face5.png"));
     label_date_time = new QLabel(this);
     label_date_time->setStyleSheet("color: rgb(255, 255, 255);");
@@ -56,9 +52,9 @@ void FaceAttendance::initWidget()
 
     sqliteSingleton::getInstance()->initDB("QSQLITE");
     sqliteSingleton::getInstance()->createTable();
-    mAdmiWidget->setSqlDatabase(sqliteSingleton::getInstance()->db);
 }
 
+//显示图片
 void FaceAttendance::slotShowImage(QImage image)
 {
     try {
@@ -76,7 +72,7 @@ void FaceAttendance::slotShowImage(QImage image)
         ui->label_face->clear();
     }
 }
-
+//显示识别结果
 void FaceAttendance::slotShowIDResult(QString id)
 {
     qDebug()<< "slotShowIDResult";
@@ -88,7 +84,7 @@ void FaceAttendance::slotShowIDResult(QString id)
         ui->lineEdit_name->setText(name);
     }
 }
-
+//确定打卡
 void FaceAttendance::on_pushButton_sure_clicked()
 {
     QString id = ui->lineEdit_id->text();
@@ -114,12 +110,15 @@ void FaceAttendance::on_pushButton_sure_clicked()
     }
 }
 
-
+//显示时间
 void FaceAttendance::showTime()
 {
     QDateTime local(QDateTime::currentDateTime());
     label_date_time->setText(local.toString("yyyy年MM月dd日  hh:mm:ss"));
-    ui->textBrowserNotice->setText("通告标题：好好学习，天天向上 \n通告内容：读书、锻炼、做公益");
+//    ui->textBrowserNotice->setText("通告标题：好好学习，天天向上 \n通告内容：读书、锻炼、做公益");
+    QString title = sqliteSingleton::getInstance()->getNoticeTitle();
+    QString context = sqliteSingleton::getInstance()->getNoticeContext();
+    ui->textBrowserNotice->setText(tr("通告标题：%1 \n通告内容：%2").arg(title).arg(context));
 }
 
 /**
@@ -132,6 +131,7 @@ void FaceAttendance::on_pushButton_break_clicked()
     this->close();
 }
 
+//图片截取成圆形
 QPixmap FaceAttendance::PixmapToRound(const QPixmap &src, int radius)
 {
     if (src.isNull()) {
@@ -150,6 +150,7 @@ QPixmap FaceAttendance::PixmapToRound(const QPixmap &src, int radius)
     return image;
 }
 
+//添加日志
 void FaceAttendance::appendLog(const QString &text)
 {
     QDateTime local(QDateTime::currentDateTime());
@@ -158,6 +159,7 @@ void FaceAttendance::appendLog(const QString &text)
     ui->textBrowserLog->append(text);
 }
 
+//判断时间是否有效
 bool FaceAttendance::isTimeValid(QString time)
 {
     if(mBeginTime.isEmpty() || mEndTime.isEmpty()){
@@ -171,6 +173,7 @@ bool FaceAttendance::isTimeValid(QString time)
     return false;
 }
 
+//打开摄像头
 void FaceAttendance::on_pushButton_cam_clicked()
 {
    static bool isOpen=false;
@@ -193,14 +196,14 @@ void FaceAttendance::on_pushButton_cam_clicked()
 
 void FaceAttendance::on_pushButton_admi_clicked()
 {
-    PasswordDialog tPasswordDialog;
+//    PasswordDialog tPasswordDialog;
 //    tPasswordDialog.setPassword(getAdmiPassword());
-    tPasswordDialog.setPassword(sqliteSingleton::getInstance()->getAdmiPassword());
-    tPasswordDialog.exec();
-    if(tPasswordDialog.getIsOk()){
-        mAdmiWidget->setWindowModality(Qt::ApplicationModal);//设置模态
-        mAdmiWidget->show();
-    }
+//    tPasswordDialog.setPassword(sqliteSingleton::getInstance()->getAdmiPassword());
+//    tPasswordDialog.exec();
+//    if(tPasswordDialog.getIsOk()){
+//        mAdmiWidget->setWindowModality(Qt::ApplicationModal);//设置模态
+//        mAdmiWidget->show();
+//    }
 }
 
 void FaceAttendance::slotSetTimePeriod(QString b_time, QString e_time)

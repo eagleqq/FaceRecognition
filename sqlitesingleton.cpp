@@ -16,6 +16,7 @@ sqliteSingleton::sqliteSingleton(QObject *parent)
 
 void sqliteSingleton::initDB(QString db_type)
 {
+    //初始化数据库 支持sqlite  mysql
     qDebug() << "初始化数据库";
     if(db_type == "QSQLITE"){
         db = QSqlDatabase::addDatabase("QSQLITE");
@@ -44,6 +45,7 @@ void sqliteSingleton::initDB(QString db_type)
 
 void sqliteSingleton::createTable()
 {
+    //创建表格
     QSqlQuery query(db);
     bool ret = query.exec("create table admi_info (id varchar(40) primary key, password varchar(20))");
     qDebug() << "创建管理员信息表格admi_info" << ret;
@@ -54,13 +56,55 @@ void sqliteSingleton::createTable()
     ret = query.exec("create table record_info (id int primary key, stuId int, name varchar(20), clockDate varchar(40),clockTime varchar(40), isValid varchar(80))");
     qDebug() << "创建打卡记录表格record_info" << ret;
 
+    ret = query.exec("create table notice_info (id int primary key, title varchar(20), context varchar(40))");
+    qDebug() << "创建通知表格notice_info" << ret;
+
     insertAdmiTable("1", "654321");
-    insertStuTable("2016117249", "shenjun");
-    insertRecordTable("17310520301", "fangjun", "", "", "无效");
+//    insertStuTable("2016117249", "shenjun");
+    //    insertRecordTable("17310520301", "fangjun", "", "", "无效");
 }
+
+bool sqliteSingleton::insertNoticeTable(QString title, QString context)
+{
+    //添加通知信息 标题 内容
+    QSqlQuery query(db);
+    bool ret = query.exec(tr("insert into notice_info(title, context) values('%1', '%2')").arg(title).arg(context));
+    qDebug() << "insertNoticeTable" << ret;
+    return ret;
+}
+
+QString sqliteSingleton::getNoticeTitle()
+{
+    //获取最新通知标题
+    QString title="";
+    QSqlQuery query(db);
+    bool ret = query.exec("select * from notice_info");
+    qDebug() << "getNoticeTitle" << ret;
+    while (query.next()) {
+        title = query.value("title").toString();
+        qDebug()<<title;
+    }
+    return title;
+}
+
+QString sqliteSingleton::getNoticeContext()
+{
+    //获取最新通知内容
+    QString context="";
+    QSqlQuery query(db);
+    bool ret = query.exec("select * from notice_info");
+    qDebug() << "getNoticeContext" << ret;
+    while (query.next()) {
+        context = query.value("context").toString();
+        qDebug()<<context;
+    }
+    return context;
+}
+
 
 void sqliteSingleton::insertAdmiTable(QString id, QString pwd)
 {
+    //插入管理员信息
     QSqlQuery query(db);
     bool ret = query.exec(tr("insert into admi_info values('%1', '%2')").arg(id).arg(pwd));
     qDebug() << "insertAdmiTable" << ret;
@@ -68,6 +112,7 @@ void sqliteSingleton::insertAdmiTable(QString id, QString pwd)
 
 void sqliteSingleton::insertStuTable(QString id, QString name)
 {
+    //添加学生信息
     QSqlQuery query(db);
     bool ret = query.exec(tr("insert into stu_info values('%1', '%2')").arg(id).arg(name));
     qDebug() << "insertStuTable" << ret;
@@ -76,6 +121,7 @@ void sqliteSingleton::insertStuTable(QString id, QString name)
 void sqliteSingleton::insertRecordTable(QString stu_id, QString name,
                                         QString clock_date, QString clock_time, QString valid)
 {
+    //添加历史记录
     QSqlQuery query(db);
     bool ret = query.exec(tr("insert into record_info(stuId, name, clockDate, clockTime, isValid) "
                              "values('%1', '%2', '%3', '%4','%5')")
@@ -89,6 +135,7 @@ void sqliteSingleton::insertRecordTable(QString stu_id, QString name,
 
 QString sqliteSingleton::getStudentName(QString id)
 {
+    //根据学号查询名字
     QString name;
     QSqlQuery query(db);
     bool ret = query.exec(tr("select * from stu_info where id='%1'").arg(id));
@@ -102,13 +149,14 @@ QString sqliteSingleton::getStudentName(QString id)
 
 QList<QString> sqliteSingleton::getAdmiPassword()
 {
+    //获取管理员密码
     QList<QString> pwdList;
     QSqlQuery query(db);
-    bool ret = query.exec(tr("select * from admi_info"));
-    qDebug() << "getAdmiPassword" << ret;
+    query.exec(tr("select * from admi_info"));
     while (query.next()) {
         pwdList.append(query.value("password").toString());
     }
+    qDebug() << "getAdmiPassword" << pwdList;
     return pwdList;
 }
 

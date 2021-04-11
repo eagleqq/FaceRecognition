@@ -7,6 +7,8 @@
 #include <QDebug>
 #include <QSqlDatabase>
 
+
+//单例模式数据库
 class sqliteSingleton: public QObject
 {
     Q_OBJECT
@@ -26,6 +28,9 @@ public:
 
     void initDB(QString db_type);
     void createTable();
+    bool insertNoticeTable(QString title, QString context);
+    QString getNoticeTitle();
+    QString getNoticeContext();
     void insertAdmiTable(QString id, QString pwd);
     void insertStuTable(QString id, QString name);
     void insertRecordTable(QString stu_id, QString name,QString clock_date, QString clock_time, QString valid);

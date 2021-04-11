@@ -8,9 +8,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QString fileName = QCoreApplication::applicationDirPath();
-    qDebug()<<fileName;
-    qDebug() << QDir::toNativeSeparators(fileName);
+    //人脸识别界面
     FaceAttendance w;
     w.show();
 
